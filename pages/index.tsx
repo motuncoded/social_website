@@ -4,21 +4,18 @@ import { inter, roboto_serif } from "../styles/fonts";
 //Api
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
+type Post = {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+};
 
+type Error = {
+  message: string;
+};
 
 export default function Home() {
-  type Post = {
-    id: number;
-    title: string;
-    body: string;
-    userId: number;
-  };
-
-  type Error = {
-    message: string;
-  };
-
-
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -60,20 +57,21 @@ export default function Home() {
 
   return (
     <div className="flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] ">
-      <h1 className={`${inter.className} text-2xl py-4 font-bold`}>Post Feed</h1>
+      <h1 className={`${inter.className} text-2xl py-4 font-bold`}>
+        Post Feed
+      </h1>
       <div className="grid gap-4 max-w-[700px] w-calc[100% - 2rem] max-sm:max-w-[325px]">
-
-      {posts.map((post: Post) => {
-        return (
-          <div
-            key={post.id}
-            className={`${roboto_serif.className} text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]`}
-          >
-            <h2 className="font-bold mb-2">{post.title}</h2>
-            <p className="">{post.body}</p>
-          </div>
-        );
-      })}
+        {posts.map((post: Post) => {
+          return (
+            <div
+              key={post.id}
+              className={`${roboto_serif.className} text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]`}
+            >
+              <h2 className="font-bold mb-2">{post.title}</h2>
+              <p className="">{post.body}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
