@@ -9,5 +9,5 @@
   --main-border: #57606a;
 }
 body {
-  background-color: var(--main-bg-color);
+  background-color: var(--main-bg-color-default);
 }
