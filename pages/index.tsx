@@ -35,6 +35,8 @@ export default function Home() {
       setPosts((prev) => [...prev, ...posts]);
       if (posts.length > 10) {
         setHasMore(true);
+      } else if (posts.length === 0) {
+        setHasMore(true);
       } else {
         setHasMore(false);
       }
@@ -107,9 +109,13 @@ export default function Home() {
             );
           })}
       </div>
-      {!hasMore && (
+      {!hasMore ? (
         <div className="py-4">
           <p className="text-[1rem] text-[var(--main-color)] ">Loading...</p>
+        </div>
+      ) : (
+        <div className="py-4">
+          <p className="text-[1rem] text-[var(--main-color)] ">No more posts</p>
         </div>
       )}
     </div>
