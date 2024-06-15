@@ -141,7 +141,7 @@ export default function Home() {
 
       {!hasMore && (
         <div className="py-4">
-          <p className="text-[1rem] text-[var(--main-color)]"></p>
+          <p className="text-[1rem] text-[var(--main-color)]">loading</p>
         </div>
       )}
     </div>
