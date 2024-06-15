@@ -5,8 +5,7 @@ import { FaRegComment } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
 
 //Api
-const POSTS_URL =
-  "https://jsonplaceholder.typicode.com/posts?_page=";
+const POSTS_URL = "https://jsonplaceholder.typicode.com/posts?_page=";
 
 // Type definitions
 type Post = {
@@ -86,7 +85,6 @@ export default function Home() {
     );
   }
 
-
   const handleLikeClick = (
     event: React.MouseEvent<HTMLButtonElement>,
     post: Post,
@@ -99,7 +97,7 @@ export default function Home() {
     );
   };
   return (
-      <div
+    <div
       className="flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-4"
       ref={scrollContainerRef}
     >
@@ -133,17 +131,13 @@ export default function Home() {
             </div>
           );
         })}
-       
       </div>
 
       {!hasMore && (
-  <div className="py-4">
-      <p className="text-[1rem] text-[var(--main-color)]"></p>
-      </div>
- )}
-
-    
+        <div className="py-4">
+          <p className="text-[1rem] text-[var(--main-color)]"></p>
+        </div>
+      )}
     </div>
-
   );
 }
