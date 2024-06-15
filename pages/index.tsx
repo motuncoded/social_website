@@ -85,6 +85,8 @@ export default function Home() {
       </div>
     );
   }
+
+
   const handleLikeClick = (
     event: React.MouseEvent<HTMLButtonElement>,
     post: Post,
@@ -97,7 +99,7 @@ export default function Home() {
     );
   };
   return (
-    <div
+      <div
       className="flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-4"
       ref={scrollContainerRef}
     >
@@ -131,15 +133,17 @@ export default function Home() {
             </div>
           );
         })}
+       
       </div>
 
- 
       {!hasMore && (
-        <div className="py-4">
-          <p className="text-[1rem] text-[var(--main-color)] ">Loading...</p>
-        </div>
-       
-      )}
+  <div className="py-4">
+      <p className="text-[1rem] text-[var(--main-color)]"></p>
+      </div>
+ )}
+
+    
     </div>
+
   );
 }
