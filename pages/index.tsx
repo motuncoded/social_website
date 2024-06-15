@@ -5,8 +5,7 @@ import { FaRegComment } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
 
 //Api
-const POSTS_URL =
-  "https://jsonplaceholder.typicode.com/posts?_per_page=12&_page=";
+const POSTS_URL = "https://jsonplaceholder.typicode.com/posts?_page=";
 
 // Type definitions
 type Post = {
@@ -15,7 +14,6 @@ type Post = {
   body: string;
   userId: number;
   likes: number;
-  liked: boolean;
 };
 
 type Error = {
@@ -40,10 +38,7 @@ export default function Home() {
       setPosts((prev) => [...prev, ...posts]);
       if (posts.length > 10) {
         setHasMore(true);
-      } else if (posts.length === 0) {
-        setHasMore(true);
-      } else {-m
-        setHasMore(false);
+      } else {
       }
     } catch (error: any) {
       setError(error.message);
@@ -54,7 +49,7 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       fetchPosts();
-    }, 4000);
+    }, 1000);
   }, [page]);
 
   useEffect(() => {
@@ -88,6 +83,7 @@ export default function Home() {
       </div>
     );
   }
+
   const handleLikeClick = (
     event: React.MouseEvent<HTMLButtonElement>,
     post: Post,
@@ -95,9 +91,7 @@ export default function Home() {
     event.preventDefault();
     setPosts((prevPosts) =>
       prevPosts.map((p) =>
-        p.id === post.id
-          ? { ...p, likes: p.liked ? 0 : (p.likes || 0) + 1, liked: !p.liked }
-          : p,
+        p.id === post.id ? { ...p, likes: (p.likes || 0) + 1 } : p,
       ),
     );
   };
@@ -118,17 +112,13 @@ export default function Home() {
             >
               <h2 className="font-bold mb-2">{post.title}</h2>
               <p className="">{post.body}</p>
-              <div className="flex justify-between gap-2 mt-2">
+              <div className="flex justify-between items-center gap-2 mt-2">
                 <div className="flex flex-row items-center justify-items-center">
                   <button
                     type="button"
                     onClick={(event) => handleLikeClick(event, post)}
                   >
-                    {post.liked ? (
-                      <IoHeart size="18" />
-                    ) : (
-                      <IoHeartOutline size="18" />
-                    )}
+                    <IoHeartOutline size="18" />{" "}
                   </button>
                   {post.likes === 0 ? (
                     <p className="none pl-2 text-[transparent]">{post.likes}</p>
@@ -136,18 +126,21 @@ export default function Home() {
                     <p className="pl-2 text-[.95rem]">{post.likes}</p>
                   )}
                 </div>
+                <button type="button">
+                  <FaRegComment />
+                </button>
+                <button type="button">
+                  <CiShare2 />
+                </button>
               </div>
             </div>
           );
         })}
       </div>
-      {!hasMore ? (
+
+      {!hasMore && (
         <div className="py-4">
-          <p className="text-[1rem] text-[var(--main-color)] ">Loading...</p>
-        </div>
-      ) : (
-        <div className="py-4">
-          <p className="text-[1rem] text-[var(--main-color)] ">No more posts</p>
+          <p className="text-[1rem] text-[var(--main-color)]">loading</p>
         </div>
       )}
     </div>
