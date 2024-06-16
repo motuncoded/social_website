@@ -39,6 +39,7 @@ export default function Home() {
       if (posts.length > 10) {
         setHasMore(true);
       } else {
+        setHasMore(false);
 
       }
     } catch (error: any) {
