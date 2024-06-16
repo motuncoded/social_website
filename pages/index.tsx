@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { inter, roboto_serif } from "../styles/fonts";
+import { IoHeartOutline, IoHeart } from "react-icons/io5";
+import { FaRegComment } from "react-icons/fa";
+import { CiShare2 } from "react-icons/ci";
 
 //Api
-const POSTS_URL =
-  "https://jsonplaceholder.typicode.com/posts?_per_page=12&_page=";
+const POSTS_URL = "https://jsonplaceholder.typicode.com/posts?_page=";
 
 // Type definitions
 type Post = {
@@ -11,6 +13,7 @@ type Post = {
   title: string;
   body: string;
   userId: number;
+  likes: number;
 };
 
 type Error = {
@@ -35,10 +38,9 @@ export default function Home() {
       setPosts((prev) => [...prev, ...posts]);
       if (posts.length > 10) {
         setHasMore(true);
-      } else if (posts.length === 0) {
-        setHasMore(true);
       } else {
         setHasMore(false);
+
       }
     } catch (error: any) {
       setError(error.message);
@@ -49,7 +51,11 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       fetchPosts();
+
+
+
     }, 1000);
+
   }, [page]);
 
   useEffect(() => {
@@ -84,6 +90,17 @@ export default function Home() {
     );
   }
 
+  const handleLikeClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    post: Post,
+  ) => {
+    event.preventDefault();
+    setPosts((prevPosts) =>
+      prevPosts.map((p) =>
+        p.id === post.id ? { ...p, likes: (p.likes || 0) + 1 } : p,
+      ),
+    );
+  };
   return (
     <div
       className="flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-4"
@@ -93,29 +110,39 @@ export default function Home() {
         Post Feed
       </h1>
       <div className="grid gap-4 max-w-[700px] w-calc[100% - 2rem] max-sm:max-w-[325px]">
-        {posts &&
-          posts.length > 0 &&
-          posts.map((post: Post) => {
-            return (
-              <div
-                key={post.id}
-                className={`${roboto_serif.className} text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]`}
-              >
-                <h2 className="font-bold mb-2">
-                  {post.id} {post.title}
-                </h2>
-                <p className="">{post.body}</p>
+
+        {posts.map((post: Post) => {
+          return (
+            <div
+              key={post.id}
+              className={`${roboto_serif.className} text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]`}
+            >
+              <h2 className="font-bold mb-2">{post.title}</h2>
+              <p className="">{post.body}</p>
+              <div className="flex justify-between items-center gap-2 mt-2">
+                <div className="flex flex-row items-center justify-items-center">
+                  <button
+                    type="button"
+                    onClick={(event) => handleLikeClick(event, post)}
+                  >
+                    <IoHeartOutline size="18" />{" "}
+                  </button>
+                  {post.likes === 0 ? (
+                    <p className="none pl-2 text-[transparent]">{post.likes}</p>
+                  ) : (
+                    <p className="pl-2 text-[.95rem]">{post.likes}</p>
+                  )}
+                </div>
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
+
       </div>
-      {!hasMore ? (
+
+      {!hasMore && (
         <div className="py-4">
-          <p className="text-[1rem] text-[var(--main-color)] ">Loading...</p>
-        </div>
-      ) : (
-        <div className="py-4">
-          <p className="text-[1rem] text-[var(--main-color)] ">No more posts</p>
+          <p className="text-[1rem] text-[var(--main-color)]">loading</p>
         </div>
       )}
     </div>
