@@ -39,6 +39,7 @@ export default function Home() {
       if (posts.length > 10) {
         setHasMore(true);
       } else {
+        setHasMore(false);
       }
     } catch (error: any) {
       setError(error.message);
@@ -104,6 +105,7 @@ export default function Home() {
         Post Feed
       </h1>
       <div className="grid gap-4 max-w-[700px] w-calc[100% - 2rem] max-sm:max-w-[325px]">
+
         {posts.map((post: Post) => {
           return (
             <div
@@ -136,6 +138,7 @@ export default function Home() {
             </div>
           );
         })}
+
       </div>
 
       {!hasMore && (
