@@ -40,7 +40,6 @@ export default function Home() {
         setHasMore(true);
       } else {
         setHasMore(false);
-
       }
     } catch (error: any) {
       setError(error.message);
@@ -51,11 +50,7 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       fetchPosts();
-
-
-
     }, 1000);
-
   }, [page]);
 
   useEffect(() => {
@@ -133,6 +128,12 @@ export default function Home() {
                     <p className="pl-2 text-[.95rem]">{post.likes}</p>
                   )}
                 </div>
+                <button type="button">
+                  <FaRegComment />
+                </button>
+                <button type="button">
+                  <CiShare2 />
+                </button>
               </div>
             </div>
           );
