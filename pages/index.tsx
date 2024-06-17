@@ -10,6 +10,7 @@ export default function Home() {
         <li className="mx-6 list-disc	">Comments</li>
         <li className="mx-6 list-disc	">Users</li>
       </ul>
+
     </div>
   );
 }
