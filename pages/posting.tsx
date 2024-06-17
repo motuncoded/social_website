@@ -127,6 +127,12 @@ export default function Posting() {
                     <p className="pl-2 text-[.95rem]">{post.likes}</p>
                   )}
                 </div>
+                <button type="button">
+                  <FaRegComment />
+                </button>
+                <button type="button">
+                  <CiShare2 />
+                </button>
               </div>
             </div>
           );
