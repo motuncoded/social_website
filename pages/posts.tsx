@@ -20,7 +20,7 @@ type Error = {
   message: string;
 };
 
-export default function Posting() {
+export default function Posts() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);

@@ -9,13 +9,13 @@ const getComments = async () => {
   return res.json();
 };
 
-function Commenting() {
-  type Comment = {
-    id: number;
-    body: string;
-    name: string;
-    email: string;
-  };
+type Comment = {
+  id: number;
+  body: string;
+  name: string;
+  email: string;
+};
+function Comments() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["comments"],
     queryFn: getComments,
@@ -58,4 +58,4 @@ function Commenting() {
   );
 }
 
-export default Commenting;
+export default Comments;

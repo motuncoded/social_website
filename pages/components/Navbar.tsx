@@ -7,10 +7,10 @@ export default function Navbar() {
       <h1 className="text-[var(--main-color)] text-3xl">API </h1>
       <ul className="flex">
         <li className="px-6">
-          <Link href="/commenting">Comments</Link>
+          <Link href="/comments">Comments</Link>
         </li>
         <li className="px-6">
-          <Link href="/posting">Posts</Link>
+          <Link href="/posts">Posts</Link>
         </li>
         <li className="pl-6">
           <Link href="/users">Users</Link>
