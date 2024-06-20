@@ -1,6 +1,7 @@
 import React from "react";
-import { useComments } from "./query"; // Adjust the import path accordingly
 import { inter } from "../styles/fonts";
+import { queryKeys } from "./queryKeys";
+import { useQuery } from "@tanstack/react-query";
 
 type Comment = {
   id: number;
@@ -8,8 +9,16 @@ type Comment = {
   name: string;
   email: string;
 };
+const getComments = async () => {
+  const COMMENTS_URL = "https://jsonplaceholder.typicode.com/comments";
+  const res = await fetch(`${COMMENTS_URL}`);
+  return res.json();
+};
 function Comments() {
-  const { data, error, isLoading } = useComments();
+  const { data, error, isLoading } = useQuery({
+    queryKey: [queryKeys.COMMENT],
+    queryFn: getComments,
+  });
 
   if (isLoading) {
     return (
