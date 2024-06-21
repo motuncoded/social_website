@@ -1,7 +1,7 @@
 import React from "react";
 import { inter } from "../styles/fonts";
 import { queryKeys } from "./queryKeys";
-import { useQuery } from "@tanstack/react-query";
+import { useFetchComments } from "./hooks/useFetchComments"; // Adjust the path as necessary
 
 type Comment = {
   id: number;
@@ -9,16 +9,8 @@ type Comment = {
   name: string;
   email: string;
 };
-const getComments = async () => {
-  const COMMENTS_URL = "https://jsonplaceholder.typicode.com/comments";
-  const res = await fetch(`${COMMENTS_URL}`);
-  return res.json();
-};
-function Comments() {
-  const { data, error, isLoading } = useQuery({
-    queryKey: [queryKeys.COMMENT],
-    queryFn: getComments,
-  });
+const Comments: React.FC = () => {
+  const { data: comments, isLoading, error } = useFetchComments();
 
   if (isLoading) {
     return (
@@ -42,7 +34,7 @@ function Comments() {
     >
       <h1 className=" text-2xl py-4 font-bold">Comments</h1>
       <div className="grid gap-4 max-w-[700px] w-calc[100% - 2rem] max-sm:max-w-[325px]">
-        {data.map((comment: Comment) => (
+        {comments.map((comment: Comment) => (
           <div
             key={comment.id}
             className=" text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]"
@@ -55,6 +47,6 @@ function Comments() {
       </div>
     </div>
   );
-}
+};
 
 export default Comments;
