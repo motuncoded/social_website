@@ -9,7 +9,7 @@ const getComments = async () => {
 
 export const useFetchComments = () => {
   return useQuery({
-    queryKey: [queryKeys.COMMENT], // Assuming COMMENT is a valid key in your queryKeys object
+    queryKey: [queryKeys.COMMENT], 
     queryFn: getComments,
   });
 };
