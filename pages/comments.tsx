@@ -1,4 +1,3 @@
-import React from "react";
 import { inter } from "../styles/fonts";
 import { queryKeys } from "./queryKeys";
 import { useFetchComments } from "./hooks/useFetchComments"; // Adjust the path as necessary
