@@ -10,4 +10,8 @@
 }
 body {
   background-color: var(--main-bg-color-default);
+  color: var(--main-color);
+}
+a:link {
+  text-decoration: none;
 }
