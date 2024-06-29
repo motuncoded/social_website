@@ -37,7 +37,6 @@ const UsersList: React.FC = () => {
     return (
       <div>
         <p className="text-2xl">
-          {" "}
           Error: {error?.message || "An unexpected error occurred."}
         </p>
       </div>
