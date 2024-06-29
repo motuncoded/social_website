@@ -1,5 +1,4 @@
 import { inter } from "../styles/fonts";
-import { queryKeys } from "./queryKeys";
 import { useFetchComments } from "./hooks/useFetchComments"; // Adjust the path as necessary
 
 type Comment = {
