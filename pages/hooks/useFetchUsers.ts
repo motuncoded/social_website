@@ -9,8 +9,7 @@ const getUsers = async () => {
 
 export const useFetchUsers = () => {
   return useQuery({
-    queryKey: [queryKeys.USER],
+    queryKey: [queryKeys.GET_USER],
     queryFn: getUsers,
-
   });
 };

@@ -8,7 +8,7 @@ type Comment = {
   name: string;
   email: string;
 };
-const Comments: React.FC = () => {
+const Comments = () => {
   const { data: comments, isLoading, error } = useFetchComments();
 
   if (isLoading) {

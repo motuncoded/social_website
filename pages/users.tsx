@@ -1,4 +1,3 @@
-import React from "react";
 import { inter } from "../styles/fonts";
 import { useFetchUsers } from "./hooks/useFetchUsers";
 import { IoPersonOutline } from "react-icons/io5";
@@ -22,7 +21,7 @@ type User = {
   address: Address; // Now the User type includes an address property.
 };
 
-const UsersList: React.FC = () => {
+const UsersList = () => {
   const { data: users, isLoading, error } = useFetchUsers();
 
   if (isLoading) {
@@ -86,4 +85,3 @@ const UsersList: React.FC = () => {
 };
 
 export default UsersList;
-
