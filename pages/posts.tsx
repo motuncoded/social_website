@@ -115,7 +115,6 @@ export default function Posts() {
               <div className="flex justify-between items-center mb-2">
                 <h2 className="font-bold">{post.title}</h2>
                 <TbDots size="18"/>
-
                 </div>
               <p className="">{post.body}</p>
               <div className="flex justify-between items-center gap-2 mt-2">
