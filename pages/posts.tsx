@@ -3,6 +3,7 @@ import { inter, roboto_serif } from "../styles/fonts";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 import { FaRegComment } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
+import { TbDots } from "react-icons/tb";
 
 //Api
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts?_page=";
@@ -111,7 +112,11 @@ export default function Posts() {
               key={post.id}
               className={`${roboto_serif.className} text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]`}
             >
-              <h2 className="font-bold mb-2">{post.title}</h2>
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="font-bold">{post.title}</h2>
+                <TbDots size="18"/>
+
+                </div>
               <p className="">{post.body}</p>
               <div className="flex justify-between items-center gap-2 mt-2">
                 <div className="flex flex-row items-center justify-items-center">
