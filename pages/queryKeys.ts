@@ -4,6 +4,7 @@
 const queryKeys = {
   FETCH_COMMENTS: "FETCH_COMMENTS",
   FETCH_USERS: "FETCH_USERS",
+  FETCH_NEWS: "FETCH_NEWS",
 };
 
 export { queryKeys };
