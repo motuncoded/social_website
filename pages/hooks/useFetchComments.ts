@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../queryKeys"; // Adjust the import path as necessary
+import { QueryKeys } from "../queryKeys"; // Adjust the import path as necessary
 
 const getComments = async () => {
   const COMMENTS_URL = "https://jsonplaceholder.typicode.com/comments";
@@ -7,9 +7,10 @@ const getComments = async () => {
   return res.json();
 };
 
-export const useFetchComments = () => {
+const useFetchComments = () => {
   return useQuery({
-    queryKey: [queryKeys.FETCH_COMMENTS],
+    queryKey: [QueryKeys.FETCH_COMMENTS],
     queryFn: getComments,
   });
 };
+export default useFetchComments;

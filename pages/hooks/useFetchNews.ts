@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../queryKeys";
+import { QueryKeys } from "../queryKeys";
+
 const NEWS_API_KEY = "9bb1ce4f63d74db08d7433bd4bfd17a5";
 // Adjust the import path as necessary
 
@@ -17,7 +18,9 @@ async function getNews(): Promise<any> {
 
 export const useFetchNews = () => {
   return useQuery({
-    queryKey: [queryKeys.FETCH_NEWS],
+    queryKey: [QueryKeys.FETCH_NEWS],
     queryFn: getNews,
+    retry: false, // disable retries
   });
 };
+export default useFetchNews;

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../queryKeys";
+import { QueryKeys } from "../queryKeys";
 
 const fetchUsers = async () => {
   const USERS_URL = "https://jsonplaceholder.typicode.com/users";
@@ -7,9 +7,10 @@ const fetchUsers = async () => {
   return res.json();
 };
 
-export const useFetchUsers = () => {
+const useFetchUsers = () => {
   return useQuery({
-    queryKey: [queryKeys.FETCH_USERS],
+    queryKey: [QueryKeys.FETCH_USERS],
     queryFn: fetchUsers,
   });
 };
+export default useFetchUsers;

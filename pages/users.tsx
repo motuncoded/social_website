@@ -1,5 +1,5 @@
 import { inter } from "../styles/fonts";
-import { useFetchUsers } from "./hooks/useFetchUsers";
+import useFetchUsers from "./hooks/useFetchUsers";
 import { IoPersonOutline } from "react-icons/io5";
 import * as MaterialDesign from "react-icons/md";
 import { BiPhone } from "react-icons/bi";
