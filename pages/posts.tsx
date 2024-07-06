@@ -116,6 +116,7 @@ export default function Posts() {
                 <h2 className="font-bold">{post.title}</h2>
                 <TbDots size="18" />
               </div>
+
               <p className="">{post.body}</p>
               <div className="flex justify-between items-center gap-2 mt-2">
                 <div className="flex flex-row items-center justify-items-center">
