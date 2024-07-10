@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { useFetchNews } from "./hooks/useFetchNews";
+import useFetchNews from "./hooks/useFetchNews";
 import { poppins } from "../styles/fonts";
 
 interface NewsProp {
@@ -11,7 +11,7 @@ interface NewsProp {
   urlToImage: string;
   name: string;
 }
-export default function News() {
+function NewsPage() {
   const { data: news, isLoading, error } = useFetchNews();
   console.log(news);
   if (isLoading) {
@@ -72,3 +72,4 @@ export default function News() {
     </div>
   );
 }
+export default NewsPage;

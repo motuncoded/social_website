@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useState, useEffect, useRef } from "react";
 import { inter, roboto_serif } from "../styles/fonts";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
@@ -21,7 +23,7 @@ type Error = {
   message: string;
 };
 
-export default function Posts() {
+function PostsPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -151,3 +153,4 @@ export default function Posts() {
     </div>
   );
 }
+export default PostsPage;

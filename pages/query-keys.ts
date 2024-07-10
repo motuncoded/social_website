@@ -7,10 +7,10 @@ type QueryKey = {
   FETCH_NEWS: string;
 };
 
-const QueryKeys: QueryKey = {
+const queryKeys: QueryKey = {
   FETCH_COMMENTS: "FETCH_COMMENTS",
   FETCH_USERS: "FETCH_USERS",
   FETCH_NEWS: "FETCH_NEWS",
 };
 
-export { QueryKeys };
+export { queryKeys };

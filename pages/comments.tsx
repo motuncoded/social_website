@@ -1,5 +1,5 @@
 import { inter } from "../styles/fonts";
-import useFetchComments from "./hooks/useFetchComments"; // Adjust the path as necessary
+import useFetchComments from "./hooks/useFetchComments";
 
 type Comment = {
   id: number;
@@ -7,7 +7,7 @@ type Comment = {
   name: string;
   email: string;
 };
-const Comments = () => {
+function CommentsPage() {
   const { data: comments, isLoading, error } = useFetchComments();
 
   if (isLoading) {
@@ -45,6 +45,6 @@ const Comments = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Comments;
+export default CommentsPage;
