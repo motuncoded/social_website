@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 function HomePage() {
   return (
     <div>
-      <Navbar />
       <div className="text-6xl flex justify-center items-center flex-col min-h-[80vh] ">
         <h2 className="">JSON Placeholder API</h2>
         <ul className="text-2xl flex m-2 ">

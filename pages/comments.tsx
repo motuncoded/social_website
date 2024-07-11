@@ -7,7 +7,7 @@ type Comment = {
   name: string;
   email: string;
 };
-function CommentsPage() {
+const CommentsPage = () => {
   const { data: comments, isLoading, error } = useFetchComments();
 
   if (isLoading) {
@@ -45,6 +45,6 @@ function CommentsPage() {
       </div>
     </div>
   );
-}
+};
 
 export default CommentsPage;

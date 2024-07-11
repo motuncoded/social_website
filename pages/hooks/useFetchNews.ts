@@ -13,7 +13,7 @@ async function getNews(): Promise<any> {
     }
     return response.json();
   } catch (error) {
-    throw error;
+    throw null;
   }
 }
 

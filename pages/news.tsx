@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import useFetchNews from "./hooks/useFetchNews";
 import { poppins } from "../styles/fonts";

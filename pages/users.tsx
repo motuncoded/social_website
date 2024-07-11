@@ -1,5 +1,3 @@
-import React from "react";
-import { inter } from "../styles/fonts";
 import useFetchUsers from "./hooks/useFetchUsers";
 import { IoPersonOutline } from "react-icons/io5";
 import * as MaterialDesign from "react-icons/md";
@@ -20,7 +18,7 @@ type User = {
   address: Address;
 };
 
-function UsersPage() {
+const UsersPage = () => {
   const { data: users, isLoading, error, isError } = useFetchUsers();
 
   if (isLoading) {
@@ -47,7 +45,7 @@ function UsersPage() {
   }
 
   return (
-    <div className=" flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-2">
+    <div className="flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-2">
       <h1 className=" text-2xl py-4 font-bold">Users</h1>
       <div className="grid gap-4 max-w-[1280px] w-calc[100% - 2rem] max-sm:max-w-[325px]">
         {users.map((user: User) => (
@@ -84,6 +82,6 @@ function UsersPage() {
       </div>
     </div>
   );
-}
+};
 
 export default UsersPage;
