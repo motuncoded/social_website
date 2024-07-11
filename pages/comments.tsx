@@ -1,5 +1,5 @@
 import { inter } from "../styles/fonts";
-import useFetchComments from "./hooks/useFetchComments";
+import useFetchComments from "../hooks/useFetchComments";
 
 type Comment = {
   id: number;
