@@ -102,15 +102,13 @@ function PostsPage() {
       className="flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-4"
       ref={scrollContainerRef}
     >
-      <h1 className={`${inter.className} text-2xl py-4 font-bold`}>
-        Post Feed
-      </h1>
+      <h1 className="text-2xl py-4 font-bold">Post Feed</h1>
       <div className="grid gap-4 max-w-[700px] w-calc[100% - 2rem] max-sm:max-w-[325px]">
         {posts.map((post: Post) => {
           return (
             <div
               key={post.id}
-              className={`${roboto_serif.className} text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]`}
+              className="text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]"
             >
               <div className="flex justify-between items-center mb-2">
                 <h2 className="font-bold">{post.title}</h2>
@@ -143,7 +141,6 @@ function PostsPage() {
           );
         })}
       </div>
-
       {!hasMore && (
         <div className="py-4">
           <p className="text-[1rem] text-[var(--main-color)]">loading</p>
