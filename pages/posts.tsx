@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { inter, roboto_serif } from "../styles/fonts";
 import { IoHeartOutline } from "react-icons/io5";
 import { FaRegComment } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
