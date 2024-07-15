@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { inter, roboto_serif } from "../styles/fonts";
-import { IoHeartOutline, IoHeart } from "react-icons/io5";
+import { IoHeartOutline } from "react-icons/io5";
 import { FaRegComment } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
 import { TbDots } from "react-icons/tb";
@@ -21,7 +20,7 @@ type Error = {
   message: string;
 };
 
-export default function Posts() {
+function PostsPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -102,20 +101,19 @@ export default function Posts() {
       className="flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-4"
       ref={scrollContainerRef}
     >
-      <h1 className={`${inter.className} text-2xl py-4 font-bold`}>
-        Post Feed
-      </h1>
+      <h1 className="text-2xl py-4 font-bold">Post Feed</h1>
       <div className="grid gap-4 max-w-[700px] w-calc[100% - 2rem] max-sm:max-w-[325px]">
         {posts.map((post: Post) => {
           return (
             <div
               key={post.id}
-              className={`${roboto_serif.className} text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]`}
+              className="text-[.85rem] bg-[var(--main-bg-color)] p-4 border border-[var(--main-border)]"
             >
               <div className="flex justify-between items-center mb-2">
                 <h2 className="font-bold">{post.title}</h2>
-                <TbDots size="18"/>
-                </div>
+                <TbDots size="18" />
+              </div>
+
               <p className="">{post.body}</p>
               <div className="flex justify-between items-center gap-2 mt-2">
                 <div className="flex flex-row items-center justify-items-center">
@@ -142,7 +140,6 @@ export default function Posts() {
           );
         })}
       </div>
-
       {!hasMore && (
         <div className="py-4">
           <p className="text-[1rem] text-[var(--main-color)]">loading</p>
@@ -151,3 +148,4 @@ export default function Posts() {
     </div>
   );
 }
+export default PostsPage;

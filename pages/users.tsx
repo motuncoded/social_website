@@ -1,5 +1,4 @@
-import { inter } from "../styles/fonts";
-import { useFetchUsers } from "./hooks/useFetchUsers";
+import useFetchUsers from "../hooks/useFetchUsers";
 import { IoPersonOutline } from "react-icons/io5";
 import * as MaterialDesign from "react-icons/md";
 import { BiPhone } from "react-icons/bi";
@@ -8,8 +7,6 @@ type Address = {
   street: string;
   city: string;
   country: string;
-
-  // This defines an object where keys are strings and values are also strings.
 };
 
 type User = {
@@ -18,11 +15,11 @@ type User = {
   email: string;
   username: string;
   phone: number;
-  address: Address; // Now the User type includes an address property.
+  address: Address;
 };
 
-const UsersList = () => {
-  const { data: users, isLoading, error } = useFetchUsers();
+const UsersPage = () => {
+  const { data: users, isLoading, error, isError } = useFetchUsers();
 
   if (isLoading) {
     return (
@@ -41,11 +38,14 @@ const UsersList = () => {
       </div>
     );
   }
+  if (isError) {
+    console.log("Error occurred:", error); // error object with details
+  } else {
+    console.log("No error occurred");
+  }
 
   return (
-    <div
-      className={`${inter.className} flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-2`}
-    >
+    <div className="flex justify-center items-center flex-col bg-[var(--main-bg-color-default)] text-[var(--main-color)] py-2">
       <h1 className=" text-2xl py-4 font-bold">Users</h1>
       <div className="grid gap-4 max-w-[1280px] w-calc[100% - 2rem] max-sm:max-w-[325px]">
         {users.map((user: User) => (
@@ -84,4 +84,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default UsersPage;
