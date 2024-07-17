@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Navbar from "../components/Navbar";
 
 function HomePage() {
   return (
@@ -20,6 +19,22 @@ function HomePage() {
             <Link href="/news">News</Link>
           </li>
         </ul>
+        <div className="mt-4 flex">
+          <Link
+            className="text-2xl 
+         hover:underline decoration-[var(--main-color)] mr-4"
+            href="/login"
+          >
+            Sign in
+          </Link>
+          <Link
+            className="text-2xl 
+         hover:underline decoration-[var(--main-color)] ml-4"
+            href="/signup"
+          >
+            Sign up
+          </Link>
+        </div>
       </div>
     </div>
   );
