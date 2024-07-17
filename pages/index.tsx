@@ -35,6 +35,7 @@ function HomePage() {
             Sign up
           </Link>
         </div>
+
       </div>
     </div>
   );
