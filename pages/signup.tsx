@@ -1,32 +1,74 @@
 import { useState } from "react";
+import * as yup from "yup";
+import { useRouter } from "next/router";
 
-export default function Signup() {
-  type FormErrors = {
-    name?: string;
-    email?: string;
-    password?: string;
-    passwordConfirm?: string;
-  };
+type FormErrors = {
+  name: string;
+  email: string;
+  password?: string;
+  passwordConfirm: string | null;
+  path?: string;
+  [key: string]: string | null | undefined;
+};
+
+const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState<FormErrors>({
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    path: "",
+  });
+  const router = useRouter();
+
+  const schema = yup.object().shape({
+    name: yup.string().required("Name is required"),
+    email: yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
+    passwordConfirm: yup
+      .string()
+      .oneOf([yup.ref("password")], "Passwords do not match")
+      .required("Confirm password is required"),
+  });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const newErrors: FormErrors = {};
-    if (!name) newErrors.name = "Please enter your name";
-    if (!email) newErrors.email = "Please enter your email";
-    if (!password) newErrors.password = "Please enter a password";
-    if (password !== passwordConfirm)
-      newErrors.passwordConfirm = "Passwords do not match";
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      console.log("Form submitted successfully!");
+    try {
+      const userData = { name, email, password, passwordConfirm };
+      await schema.validate(userData, { abortEarly: false });
+      router.push({
+        pathname: "/",
+        query: { name: userData.name },
+      });
+      console.log("Form is valid, submitting data:", userData);
+    } catch (err) {
+      if (err instanceof yup.ValidationError) {
+        const errorMessages: FormErrors = {
+          name: "",
+          email: "",
+          password: "",
+          passwordConfirm: "",
+        };
+        for (const error of err.inner) {
+          errorMessages[error.path || ""] = error.message;
+        }
+        setErrors(errorMessages);
+      } else {
+        console.error("An unexpected error occurred:", err);
+      }
     }
   };
+
   return (
     <div className="flex justify-center pt-4 ">
       <form
@@ -40,11 +82,10 @@ export default function Signup() {
             id="name"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            aria-required="true"
             aria-invalid={errors.name ? true : false}
             className="p-2 my-2 text-black"
           />
-          {errors.name && <div role="alert">{errors.name}</div>}
+          {errors.name && <p role="alert">{errors.name}</p>}
         </label>
 
         <label htmlFor="email" className="p-2 flex flex-col">
@@ -54,11 +95,10 @@ export default function Signup() {
             id="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            aria-required="true"
             aria-invalid={errors.email ? true : false}
             className="p-2 my-2 text-black"
           />
-          {errors.email && <div role="alert">{errors.email}</div>}
+          {errors.email && <p role="alert">{errors.email}</p>}
         </label>
 
         <label htmlFor="password" className="p-2 flex flex-col">
@@ -68,11 +108,10 @@ export default function Signup() {
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            aria-required="true"
             aria-invalid={errors.password ? true : false}
             className="p-2 my-2 text-black"
           />
-          {errors.password && <div role="alert">{errors.password}</div>}
+          {errors.password && <p role="alert">{errors.password}</p>}
         </label>
 
         <label htmlFor="passwordConfirm" className="p-2 flex flex-col">
@@ -81,23 +120,26 @@ export default function Signup() {
             type="password"
             id="passwordConfirm"
             value={passwordConfirm}
-            onChange={(event) => setPasswordConfirm(event.target.value)}
-            aria-required="true"
+            onChange={(event) => {
+              setPasswordConfirm(event.target.value);
+              if (event.target.value === password) {
+                setErrors({ ...errors, passwordConfirm: "" });
+              }
+            }}
             aria-invalid={errors.passwordConfirm ? true : false}
             className="p-2 my-2 text-black"
           />
-          {errors.passwordConfirm && (
+          {errors.passwordConfirm ? (
             <div role="alert">{errors.passwordConfirm}</div>
-          )}
+          ) : null}
         </label>
 
-        <button
-          type="submit"
-          className=" p-2 m-2 text-black w-[150px] bg-[var(--main-color)]"
-        >
+        <button className=" p-2 m-2 text-black w-[150px] bg-[var(--main-color)]">
           Sign Up
         </button>
       </form>
     </div>
   );
-}
+};
+
+export default Signup;
