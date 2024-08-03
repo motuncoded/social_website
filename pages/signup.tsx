@@ -11,20 +11,6 @@ type FormErrors = {
   [key: string]: string | null | undefined;
 };
 
-const Signup = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [errors, setErrors] = useState<FormErrors>({
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
-    path: "",
-  });
-  const router = useRouter();
-
   const schema = yup.object().shape({
     name: yup.string().required("Name is required"),
     email: yup
@@ -40,6 +26,21 @@ const Signup = () => {
       .oneOf([yup.ref("password")], "Passwords do not match")
       .required("Confirm password is required"),
   });
+
+const Signup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [errors, setErrors] = useState<FormErrors>({
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    path: "",
+  });
+  const router = useRouter();
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
