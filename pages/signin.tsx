@@ -3,65 +3,43 @@ import * as yup from "yup";
 import { useRouter } from "next/router";
 
 type FormErrors = {
-  name: string;
   email: string;
-  password?: string;
-  passwordConfirm: string | null;
-  path?: string;
-  [key: string]: string | null | undefined;
+  password: string;
+  [key: string]: string;
 };
 
 const schema = yup.object().shape({
-  name: yup.string().required("Name is required"),
   email: yup
     .string()
     .email("Invalid email address")
     .required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
-  passwordConfirm: yup
-    .string()
-    .oneOf([yup.ref("password")], "Passwords do not match")
-    .required("Confirm password is required"),
+  password: yup.string().required("Password is required"),
 });
 
-const Signup = () => {
-  const [name, setName] = useState("");
+const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [errors, setErrors] = useState<FormErrors>({
-    name: "",
     email: "",
     password: "",
-    passwordConfirm: "",
-    path: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const userData = { name, email, password, passwordConfirm };
+      const userData = { email, password };
       await schema.validate(userData, { abortEarly: false });
       router.push({
         pathname: "/",
-        query: { name: userData.name },
       });
-      console.log("Form is valid, submitting data:", userData);
+      console.log("Form is valid, logging in...");
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         const errorMessages: FormErrors = {
-          name: "",
           email: "",
           password: "",
-          passwordConfirm: "",
         };
         for (const error of err.inner) {
           errorMessages[error.path || ""] = error.message;
@@ -79,19 +57,6 @@ const Signup = () => {
         onSubmit={handleSubmit}
         className="flex flex-col max-w-[450px] w-[100%]"
       >
-        <label htmlFor="name" className="p-2 flex flex-col">
-          Name:
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            aria-invalid={errors.name ? true : false}
-            className="p-2 my-2 text-black"
-          />
-          {errors.name && <p role="alert">{errors.name}</p>}
-        </label>
-
         <label htmlFor="email" className="p-2 flex flex-col">
           Email:
           <input
@@ -108,7 +73,7 @@ const Signup = () => {
         <label htmlFor="password" className="p-2 flex flex-col">
           Password:
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
@@ -125,39 +90,12 @@ const Signup = () => {
           {errors.password && <p role="alert">{errors.password}</p>}
         </label>
 
-        <label htmlFor="passwordConfirm" className="p-2 flex flex-col">
-          Confirm Password:
-          <input
-            type="password"
-            id="passwordConfirm"
-            value={passwordConfirm}
-            onChange={(event) => {
-              setPasswordConfirm(event.target.value);
-              if (event.target.value === password) {
-                setErrors({ ...errors, passwordConfirm: "" });
-              }
-            }}
-            aria-invalid={errors.passwordConfirm ? true : false}
-            className="p-2 my-2 text-black"
-          />
-          <button
-            type="button"
-            onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
-            className="text-black"
-          >
-            {showPasswordConfirm ? "Hide" : "Show"}
-          </button>
-          {errors.passwordConfirm ? (
-            <div role="alert">{errors.passwordConfirm}</div>
-          ) : null}
-        </label>
-
         <button className=" p-2 m-2 text-black w-[150px] bg-[var(--main-color)]">
-          Sign Up
+          Sign In
         </button>
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default Signin;
