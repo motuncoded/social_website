@@ -80,14 +80,16 @@ const Signin = () => {
             aria-invalid={errors.password ? true : false}
             className="p-2 my-2 text-black"
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="text-black"
-          >
-            {showPassword ? "Hide" : "Show"}
-          </button>
           {errors.password && <p role="alert">{errors.password}</p>}
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={(event) => setShowPassword(event.target.checked)}
+            className="mx-2 mb-6"
+          />
+          Show password
         </label>
 
         <button className=" p-2 m-2 text-black w-[150px] bg-[var(--main-color)]">

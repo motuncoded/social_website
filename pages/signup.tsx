@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import * as yup from "yup";
 import { useRouter } from "next/router";
+import { UserContext } from "../contexts/UserContext";
 
 type FormErrors = {
   name: string;
@@ -40,10 +41,12 @@ const Signup = () => {
     path: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
   const router = useRouter();
+    const user = useContext(UserContext);
+
+  const isValid = name && email && password && passwordConfirm;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,8 +73,10 @@ const Signup = () => {
       } else {
         console.error("An unexpected error occurred:", err);
       }
+    }finally{
     }
   };
+  
 
   return (
     <div className="flex justify-center pt-4 ">
@@ -83,7 +88,6 @@ const Signup = () => {
           Name:
           <input
             type="text"
-            id="name"
             value={name}
             onChange={(event) => setName(event.target.value)}
             aria-invalid={errors.name ? true : false}
@@ -96,7 +100,6 @@ const Signup = () => {
           Email:
           <input
             type="email"
-            id="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             aria-invalid={errors.email ? true : false}
@@ -108,28 +111,28 @@ const Signup = () => {
         <label htmlFor="password" className="p-2 flex flex-col">
           Password:
           <input
-            type="password"
-            id="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             aria-invalid={errors.password ? true : false}
             className="p-2 my-2 text-black"
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="text-black"
-          >
-            {showPassword ? "Hide" : "Show"}
-          </button>
           {errors.password && <p role="alert">{errors.password}</p>}
+        </label>
+        <label className="mb-4">
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={(event) => setShowPassword(event.target.checked)}
+            className="mx-2"
+          />
+          Show password
         </label>
 
         <label htmlFor="passwordConfirm" className="p-2 flex flex-col">
           Confirm Password:
           <input
-            type="password"
-            id="passwordConfirm"
+            type={showPasswordConfirm ? "text" : "password"}
             value={passwordConfirm}
             onChange={(event) => {
               setPasswordConfirm(event.target.value);
@@ -140,21 +143,25 @@ const Signup = () => {
             aria-invalid={errors.passwordConfirm ? true : false}
             className="p-2 my-2 text-black"
           />
-          <button
-            type="button"
-            onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
-            className="text-black"
-          >
-            {showPasswordConfirm ? "Hide" : "Show"}
-          </button>
           {errors.passwordConfirm ? (
             <div role="alert">{errors.passwordConfirm}</div>
           ) : null}
         </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={showPasswordConfirm}
+            onChange={(event) => setShowPasswordConfirm(event.target.checked)}
+            className="mx-2 "
+          />
+          Show confirm password
+        </label>
 
-        <button className=" p-2 m-2 text-black w-[150px] bg-[var(--main-color)]">
-          Sign Up
-        </button>
+        <input type="submit"
+        value="Submit"
+          disabled={!isValid}
+          className=" p-2 mx-2 my-6 text-[var(--main-color)] w-[150px] bg-[var(--main-bg-color)]"/>
+          
       </form>
     </div>
   );
