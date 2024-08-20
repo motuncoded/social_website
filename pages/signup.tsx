@@ -44,7 +44,6 @@ const Signup = () => {
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
   const router = useRouter();
-    const user = useContext(UserContext);
 
   const isValid = name && email && password && passwordConfirm;
 
@@ -53,6 +52,7 @@ const Signup = () => {
     try {
       const userData = { name, email, password, passwordConfirm };
       await schema.validate(userData, { abortEarly: false });
+
       router.push({
         pathname: "/",
         query: { name: userData.name },
@@ -73,10 +73,9 @@ const Signup = () => {
       } else {
         console.error("An unexpected error occurred:", err);
       }
-    }finally{
+    } finally {
     }
   };
-  
 
   return (
     <div className="flex justify-center pt-4 ">
@@ -157,11 +156,12 @@ const Signup = () => {
           Show confirm password
         </label>
 
-        <input type="submit"
-        value="Submit"
+        <input
+          type="submit"
+          value="Sign up"
           disabled={!isValid}
-          className=" p-2 mx-2 my-6 text-[var(--main-color)] w-[150px] bg-[var(--main-bg-color)]"/>
-          
+          className=" p-2 mx-2 my-6 text-[var(--main-color)] w-[150px] bg-[var(--main-bg-color)]"
+        />
       </form>
     </div>
   );

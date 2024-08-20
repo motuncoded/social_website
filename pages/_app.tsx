@@ -10,8 +10,8 @@ const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <UserProvider>
+    <UserProvider>
+      <QueryClientProvider client={queryClient}>
         <style jsx global>{`
           body {
             font-family: ${poppins.style.fontFamily};
@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
         `}</style>
         <Navbar />
         <Component {...pageProps} />
-      </UserProvider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </UserProvider>
   );
 }

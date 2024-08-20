@@ -25,6 +25,7 @@ const Signin = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const isValid = email && password;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -91,10 +92,12 @@ const Signin = () => {
           />
           Show password
         </label>
-
-        <button className=" p-2 m-2 text-black w-[150px] bg-[var(--main-color)]">
-          Sign In
-        </button>
+        <input
+          type="submit"
+          value="Sign in"
+          disabled={!isValid}
+          className=" p-2 mx-2 my-6 text-[var(--main-color)] w-[150px] bg-[var(--main-bg-color)]"
+        />
       </form>
     </div>
   );
