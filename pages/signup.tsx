@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { useRouter } from "next/router";
 import { UserContext } from "../contexts/UserContext";
 
+
 type FormErrors = {
   name: string;
   email: string;
@@ -28,6 +29,7 @@ const schema = yup.object().shape({
     .required("Confirm password is required"),
 });
 
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -47,6 +49,7 @@ const Signup = () => {
     const user = useContext(UserContext);
 
   const isValid = name && email && password && passwordConfirm;
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -100,6 +103,7 @@ const Signup = () => {
           Email:
           <input
             type="email"
+            id="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             aria-invalid={errors.email ? true : false}
@@ -128,6 +132,7 @@ const Signup = () => {
           />
           Show password
         </label>
+
 
         <label htmlFor="passwordConfirm" className="p-2 flex flex-col">
           Confirm Password:
@@ -161,7 +166,6 @@ const Signup = () => {
         value="Submit"
           disabled={!isValid}
           className=" p-2 mx-2 my-6 text-[var(--main-color)] w-[150px] bg-[var(--main-bg-color)]"/>
-          
       </form>
     </div>
   );
