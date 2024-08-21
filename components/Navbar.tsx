@@ -1,7 +1,6 @@
 import { CiMenuFries } from "react-icons/ci";
-import { useContext } from "react";
 
-import { UserContext } from "../contexts/UserContext";
+
 
 function Navbar() {
   return (

@@ -5,15 +5,14 @@ interface User {
 }
 
 interface UserContextType {
-  user: any;
-  setUser: (user: any) => void;
+  user: User;
+  setUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<any>(null);
-
+  const [user, setUser] = useState<User>({ name: "" });
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
