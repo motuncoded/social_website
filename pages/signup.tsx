@@ -86,6 +86,7 @@ const Signup = () => {
           Name:
           <input
             type="text"
+            id="name"
             value={name}
             onChange={(event) => setName(event.target.value)}
             aria-invalid={errors.name ? true : false}
@@ -98,6 +99,7 @@ const Signup = () => {
           Email:
           <input
             type="email"
+            id="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             aria-invalid={errors.email ? true : false}
@@ -111,6 +113,7 @@ const Signup = () => {
           <input
             type={showPassword ? "text" : "password"}
             value={password}
+            id="password"
             onChange={(event) => setPassword(event.target.value)}
             aria-invalid={errors.password ? true : false}
             className="p-2 my-2 text-black"
@@ -120,6 +123,7 @@ const Signup = () => {
         <label className="mb-4">
           <input
             type="checkbox"
+            id="passwordConfirm"
             checked={showPassword}
             onChange={(event) => setShowPassword(event.target.checked)}
             className="mx-2"
