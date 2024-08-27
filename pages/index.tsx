@@ -23,8 +23,7 @@ function HomePage() {
           <Link
             className="text-2xl mx-4
          hover:underline decoration-[var(--main-color)]"
-            href="/login"
-          >
+            href="/signin"          >
             Sign in
           </Link>
           <Link
@@ -35,7 +34,6 @@ function HomePage() {
             Sign up
           </Link>
         </div>
-
       </div>
     </div>
   );
